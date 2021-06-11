@@ -15,8 +15,18 @@ import { FrequentDataService } from './utility/services/frequent-data.service';
 import { RestApiConnectorService } from './utility/services/restapi-connector.service';
 
 const routes: Routes = [
-
-
+  {
+    path: 'input',
+    component: HomeComponent
+  },
+  {
+    path: 'detail/:storeId/:itemId/:referralCode',
+    component: DetailComponent
+  },
+  {
+    path: 'detail/:storeId/:itemId',
+    component: DetailComponent
+  },
 ];
 
 @NgModule({

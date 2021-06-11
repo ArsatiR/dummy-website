@@ -4,13 +4,6 @@
   "engines": {
     "node": "14.x"
   },
-  "budgets": [
-    {
-      "type": "initial",
-      "maximumWarning": "4mb",
-      "maximumError": "5mb"
-    }
-  ],
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
