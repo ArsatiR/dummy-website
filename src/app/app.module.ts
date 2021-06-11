@@ -10,7 +10,6 @@ import { DetailModule } from './detail/detail.module';
 import { HomeComponent } from './home/home.component';
 import { HomeModule } from './home/home.module';
 import { SharedModule } from './utility/modules/shared.module';
-import { AppDataService } from './utility/services/app-data.service';
 import { DataManipulateService } from './utility/services/data-manipulate-service';
 import { FrequentDataService } from './utility/services/frequent-data.service';
 import { RestApiConnectorService } from './utility/services/restapi-connector.service';
@@ -47,7 +46,6 @@ const routes: Routes = [
   ],
   providers: [
     RestApiConnectorService,
-    AppDataService,
     FrequentDataService,
     DataManipulateService
   ],
