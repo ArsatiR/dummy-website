@@ -31,8 +31,8 @@ export class DataManipulateService {
      * Parse query string
      * @param queryString querystring
      */
-    parseQueryString(queryString) {
-        let params = {}, queries, temp, i, l;
+    parseQueryString(queryString:any) {
+        let params:any = {}, queries, temp, i, l;
         // Split into key/value pairs
         queries = queryString.split('&');
         // Convert the array of strings into an object
@@ -84,7 +84,7 @@ export class DataManipulateService {
      * Create date as utc
      * @param date new date to UTC
      */
-    createDateAsUTC(date) {
+    createDateAsUTC(date:any) {
         return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds()));
     }
 
@@ -92,7 +92,7 @@ export class DataManipulateService {
      * Convert date to utc
      * @param date date convert to UTC
      */
-    convertDateToUTC(date) {
+    convertDateToUTC(date:any) {
         return new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), date.getUTCHours(), date.getUTCMinutes(), date.getUTCSeconds());
     }
 

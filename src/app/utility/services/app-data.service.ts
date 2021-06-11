@@ -36,7 +36,7 @@ export class AppDataService {
      * Set user menu to localstorage
      * @param userMenu user menu object to set.
      */
-    async setUserMenu(userMenu): Promise<void>{
+    async setUserMenu(userMenu:any): Promise<void>{
         await localStorage.setItem(this._userMenu, JSON.stringify(userMenu));
     }
 
@@ -44,7 +44,7 @@ export class AppDataService {
      * Set user info to localstorage
      * @param userInfo user information object to set.
      */
-    async setUserInfo(userInfo): Promise<void>{
+    async setUserInfo(userInfo: any): Promise<void>{
         await localStorage.setItem(this._userInfo, JSON.stringify(userInfo));
     }
 
@@ -53,7 +53,7 @@ export class AppDataService {
      * @param accessToken access token to set in cookies as a keys
      * @param expiresIn The default validity (in seconds) of the access token / expired countdown for the access token as a values from cookies.
      */
-    setAccessToken(accessToken, expiresIn){
+    setAccessToken(accessToken:any, expiresIn:any){
         this.cookieService.set(this._accessToken, accessToken, expiresIn, '/');
     }
 
@@ -61,7 +61,8 @@ export class AppDataService {
      * get / retrieve user info from localstorage with promise object data type (Represents the completion of an asynchronous operation)
      */
     async getUserInfoWithPromise(): Promise<any>{
-        const userInfo = JSON.parse(localStorage.getItem(this._userInfo));
+        const user:any = localStorage.getItem(this._userInfo)
+        const userInfo = JSON.parse(user);
         return userInfo;
     }
 
@@ -69,7 +70,8 @@ export class AppDataService {
      * get / retrieve user info from localstorage.
      */
     getUserInfoWithoutPromise(){
-        const userInfo = JSON.parse(localStorage.getItem(this._userInfo));
+        const user:any = localStorage.getItem(this._userInfo)
+        const userInfo = JSON.parse(user);
         return userInfo;
     }
 
@@ -77,7 +79,8 @@ export class AppDataService {
     * get / retrieve user menu from localstorage.
     */
     getUserMenuWithoutPromise(){
-        const userMenu = JSON.parse(localStorage.getItem(this._userMenu));
+        const menu:any = localStorage.getItem(this._userMenu);
+        const userMenu = JSON.parse(menu);
         return userMenu;
     }
 

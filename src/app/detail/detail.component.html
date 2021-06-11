@@ -1,36 +1,52 @@
-<div id="Login">
+<div id="Login container" *ngIf="_ISLINKACTIVE && !loading">
   <div id="Header">
     <div id="login_regis">
       <div id="Mimi_Shop">
-        <a >Dummy Shop</a>
+        <a>Dummy Shop</a>
       </div>
 
-      <ul class="admin">
-        <li><a >Manage Feedback</a></li>
+
+      <ul class="admin" style="display: flex; justify-content: center;">
+        <!-- <li><a >Manage Feedback</a></li>
         <li><a >Manage User</a></li>
         <li><a >Manage Figure</a></li>
         <li><a >Manage Category</a></li>
-        <li><a >Transaction</a></li>
-        <li><a >Profile</a></li>
-        <li><a >Logout</a></li>
+        <li><a >Transaction</a></li> -->
+        <li>
+          <select [(ngModel)]="customerAccountId " (ngModelChange)="switchAcc()">
+            <option *ngFor="let acc of listAccount" [value]="acc.id">
+              {{acc.name}}
+            </option>
+          </select>
+
+        </li>
+        <li><a>Logout</a></li>
       </ul>
 
     </div>
   </div>
 
-  <div id="container_detail">
+  <div id="container_detail" *ngIf="data != undefined">
     <div class="kanan">
-      <div id="Figure_Description">
-        <span>Description</span><br>
+      <div id="Figure_Title">
+        <h2>{{data.name}}</h2><br>
 
+      </div>
+      <div id="Figure_Description">
+        <h4>Description</h4>
+        <span>{{data.description}}</span>
       </div>
       <div id="Figure_Detail">
         <span>Detail</span><br>
         <ul>
-          <li>Category: </li>
-          <li>Quantity: </li>
-          <li>Price: Rp. </li>
+          <li>Category: {{data.type}}</li>
+          <li>Quantity: {{data.qty}}</li>
+          <li>Price: Rp. {{data.price | number}}</li>
+          <!-- <li>Recurring: {{data.recurring | number}}</li> -->
         </ul>
+      </div>
+      <div id="Figure_Button">
+        <button mat-raised-button color="primary" (click)="buyButton()">Buy</button>
       </div>
     </div>
     <img class="Rectangle_12" src="" alt="Tidak bisa memuat">
@@ -42,3 +58,11 @@
     </div>
   </div>
 </div>
+
+<ng-container *ngIf="!_ISLINKACTIVE && !loading">
+  <h1 style="text-align: center;
+  font-size: 120px;
+  font-family: Helvetica, Verdana, Arial;">
+  Referral Code is Expired / Not Found
+  </h1>
+</ng-container>

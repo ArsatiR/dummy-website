@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Confirm Purchase</h2>
+<div mat-dialog-content class="mat-typography">
+  <div class="column">
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Quantity</mat-label>
+        <input type="number" matInput (input)="inputChange($event)" >
+      </mat-form-field>
+
+    </div>
+    <div>
+      <span>Total Price : Rp. {{totalPrice | number}}</span>
+
+    </div>
+
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)="buyButton()">Buy</button>
+</div>
