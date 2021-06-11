@@ -4,6 +4,18 @@ import { DetailComponent } from './detail.component';
 import { SharedModule } from '../utility/modules/shared.module';
 import { DetailService } from './detail.service';
 import { ConfirmPurchaseComponent } from './confirm-purchase/confirm-purchase.component';
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  {
+    path: 'detail/:storeId/:itemId/:referralCode',
+    component: DetailComponent
+  },
+  {
+    path: 'detail/:storeId/:itemId',
+    component: DetailComponent
+  },
+]
 
 @NgModule({
   exports: [
@@ -12,6 +24,7 @@ import { ConfirmPurchaseComponent } from './confirm-purchase/confirm-purchase.co
   imports: [
     CommonModule,
     SharedModule,
+    RouterModule.forChild(routes)
   ],
   declarations: [DetailComponent, ConfirmPurchaseComponent],
   providers:[
