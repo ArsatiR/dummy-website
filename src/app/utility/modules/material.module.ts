@@ -24,7 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 // import { MatProgressBarModule } from '@angular/material/progress-bar';
 // import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
-// import { MatRippleModule } from '@angular/material/core';
+import { MatRippleModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 // import { MatSidenavModule } from '@angular/material/sidenav';
 // import { MatSliderModule } from '@angular/material/slider';
@@ -92,7 +92,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         // MatProgressBarModule,
         // MatProgressSpinnerModule,
         MatRadioModule,
-        // MatRippleModule,
+        MatRippleModule,
         MatSelectModule,
         // MatSidenavModule,
         // MatSliderModule,
@@ -142,7 +142,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
         // MatProgressBarModule,
         // MatProgressSpinnerModule,
         MatRadioModule,
-        // MatRippleModule,
+        MatRippleModule,
         MatSelectModule,
         // MatSidenavModule,
         // MatSliderModule,
