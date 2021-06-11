@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { RestApiConnectorService } from 'src/app/utility/services/restapi-connector.service';
-import { AppDataService } from 'src/app/utility/services/app-data.service';
+
 
 @Injectable()
 export class DetailService implements Resolve<any>  {
@@ -18,7 +18,6 @@ export class DetailService implements Resolve<any>  {
   constructor(
     private http: HttpClient,
     private restApiConnector: RestApiConnectorService,
-    private appDataService: AppDataService
   ) { }
 
 /**
