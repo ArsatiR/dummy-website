@@ -6,7 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataManipulateService } from './data-manipulate-service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 
 /**
@@ -63,7 +63,8 @@ export class RestApiConnectorService {
      * @param http Performs http requests using XMLHttpRequest as the default backend.
      */
     constructor(protected manipulateService: DataManipulateService, protected snackBar: MatSnackBar,
-        protected cookieService: CookieService, protected appService: AppDataService, protected http: Http){
+        protected cookieService: CookieService, protected appService: AppDataService, protected http: Http,
+        protected httpClient: HttpClient){
 
     }
 
@@ -157,7 +158,7 @@ export class RestApiConnectorService {
     }
 
     // Error handling
-  handleError(error) {
+  handleError(error:any) {
     let errorMessage = '';
     if(error.error instanceof ErrorEvent) {
       // Get client-side error
@@ -170,24 +171,37 @@ export class RestApiConnectorService {
     return throwError(errorMessage);
  }
 
-    /**
+        /**
      * Performs a request with get http method and access token to current backend API.
      * @param path base service path
      * @param extraParam extra query param string
      */
-    get(path: string, extraParam = ''): Observable<any> {
-        const a = this.ip;
-        // this.checkAndAssignAccessToken();
+         get(path: string, extraParam = ''): Observable<any> {
+          const a = this.ip;
+          // this.checkAndAssignAccessToken();
 
-        if (this.isUTCDateTimeQuery && extraParam !== '' && (extraParam.indexOf('dateStart') !== -1 || extraParam.indexOf('dateEnd') !== -1)) {
-            extraParam = this.manipulateService.proccessDateQueryStringNeutralTimezone('dateStart', 'dateEnd', extraParam);
-        }
+          if (this.isUTCDateTimeQuery && extraParam !== '' && (extraParam.indexOf('dateStart') !== -1 || extraParam.indexOf('dateEnd') !== -1)) {
+              extraParam = this.manipulateService.proccessDateQueryStringNeutralTimezone('dateStart', 'dateEnd', extraParam);
+          }
 
-        return this.http.get(`${a}${path}?` + extraParam).pipe(
-          retry(1),
-          catchError(this.handleError)
-        )
-    }
+          return this.httpClient.get(`${a}${path}?` + extraParam).pipe(
+            retry(1),
+            catchError(this.handleError)
+          )
+      }
+      getString(path: string, extraParam = ''): Observable<any> {
+          const a = this.ip;
+          // this.checkAndAssignAccessToken();
+
+          if (this.isUTCDateTimeQuery && extraParam !== '' && (extraParam.indexOf('dateStart') !== -1 || extraParam.indexOf('dateEnd') !== -1)) {
+              extraParam = this.manipulateService.proccessDateQueryStringNeutralTimezone('dateStart', 'dateEnd', extraParam);
+          }
+
+          return this.httpClient.get(`${a}${path}?` + extraParam,{responseType: 'text'}).pipe(
+            retry(1),
+            catchError(this.handleError)
+          )
+      }
 
     /**
      * Performs a request with post http method and access token to current backend API.
@@ -245,45 +259,6 @@ export class RestApiConnectorService {
         )
     }
 
-    /**
-     * Performs a request with get http method, promise method (Represents the completion of an asynchronous operation) and access token to current backend API.
-     * @param path base service path
-     * @param extraParam extra query param string
-     */
-    async getWithPromise(path: string, extraParam = ''): Promise <any> {
-        const a = this.ip;
-        // this.checkAndAssignAccessToken();
-
-        if (this.isUTCDateTimeQuery && extraParam !== '' && (extraParam.indexOf('dateStart') !== -1 || extraParam.indexOf('dateEnd') !== -1)) {
-            extraParam = this.manipulateService.proccessDateQueryStringNeutralTimezone('dateStart', 'dateEnd', extraParam);
-        }
-
-        const response = await this.http.get(`${a}${path}?` + extraParam)
-                       .toPromise();
-        if(response['_body']=="") response['_body']='[]'
-        return response.json();
-    }
-
-    /**
-     * Performs a request with get http method, promise method (Represents the completion of an asynchronous operation) and access token to current backend API.
-     * @param path base service path
-     * @param extraParam extra query param string
-     */
-     async getFileWithPromise(path: string, extraParam = ''): Promise <any> {
-        const a = this.ip;
-        // this.checkAndAssignAccessToken();
-
-        if (this.isUTCDateTimeQuery && extraParam !== '' && (extraParam.indexOf('dateStart') !== -1 || extraParam.indexOf('dateEnd') !== -1)) {
-            extraParam = this.manipulateService.proccessDateQueryStringNeutralTimezone('dateStart', 'dateEnd', extraParam);
-        }
-
-        const response = await this.http.get(`${a}${path}?` + extraParam, {
-            responseType : ResponseContentType.Blob,
-        })
-                    .toPromise();
-        if(response['_body']=="") response['_body']='[]'
-        return response.blob();
-    }
 
     /**
      * Performs a request with post http method, promise method (Represents the completion of an asynchronous operation) and access token to current backend API.
@@ -364,7 +339,7 @@ export class RestApiConnectorService {
      * @param alert alert object for handle response
      * @param callback callback function
      */
-    httpGetCallback(items, url, extraParam, alert, callback: (n: any) => void) {
+    httpGetCallback(items:any, url:any, extraParam:any, alert:any, callback: (n: any) => void) {
         // this.checkAndAssignAccessToken();
 
         if (this.isUTCDateTimeQuery && extraParam !== '' && (extraParam.indexOf('dateStart') !== -1 || extraParam.indexOf('dateEnd') !== -1)) {
@@ -391,7 +366,7 @@ export class RestApiConnectorService {
      * @param type upload data type.
      * @param callback callback function
      */
-    insertFileWithCallback(event, type, callback: (n: any) => void) {
+    insertFileWithCallback(event:any, type:any, callback: (n: any) => void) {
         const fileList: FileList = event.target.files;
         // this.checkAndAssignAccessToken();
 

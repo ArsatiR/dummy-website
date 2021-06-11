@@ -34,7 +34,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/utility/theme/theming.scss"
             ],
             "scripts": []
           },
@@ -102,7 +103,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/app/utility/theme/theming.scss"
             ],
             "scripts": []
           }
