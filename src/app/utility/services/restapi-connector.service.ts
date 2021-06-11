@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions, ResponseContentType } from '@angular/http';
-import { AppDataService } from './app-data.service';
-import { CookieService } from 'ngx-cookie-service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataManipulateService } from './data-manipulate-service';
 import { Observable, throwError } from 'rxjs';
@@ -63,7 +61,7 @@ export class RestApiConnectorService {
      * @param http Performs http requests using XMLHttpRequest as the default backend.
      */
     constructor(protected manipulateService: DataManipulateService, protected snackBar: MatSnackBar,
-        protected cookieService: CookieService, protected appService: AppDataService, protected http: Http,
+        protected http: Http,
         protected httpClient: HttpClient){
 
     }
