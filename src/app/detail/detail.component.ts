@@ -15,6 +15,7 @@ export class DetailComponent implements OnInit {
 
   _ISLINKACTIVE:boolean = false;
   _ISLINKREFERRAL = false;
+  _ISNOTEXPIRED = true;
   loading = true
 
   linkUrl:any
@@ -79,6 +80,7 @@ export class DetailComponent implements OnInit {
     await this.detailService.getById(this.paramList.itemId).then(data=>{
       if(data){
         this.data = data
+
       }
     })
     this.checkLink();
@@ -117,6 +119,9 @@ export class DetailComponent implements OnInit {
         if(result == 1) this._ISLINKACTIVE = true;
         else this._ISLINKACTIVE = false
       });
+
+      if(new Date(this.data.expiredDate)  < new Date())this._ISNOTEXPIRED = false
+      else this._ISNOTEXPIRED = true
     }else{
       this.linkUrl = await this.detailService.checkRecurringByCustId(this.customerAccountId, this.paramList.itemId)
       this._ISLINKACTIVE = true;
