@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DetailService } from './detail.service';
 import * as moment from "moment";
@@ -15,6 +15,7 @@ export class DetailComponent implements OnInit {
 
   _ISLINKACTIVE:boolean = false;
   _ISLINKREFERRAL = false;
+  _ISNOTEXPIRED = true;
   loading = true
 
   linkUrl:any
@@ -74,14 +75,18 @@ export class DetailComponent implements OnInit {
 
   }
 
+
   async loadData() {
     await this.detailService.getById(this.paramList.itemId).then(data=>{
       if(data){
         this.data = data
+
       }
     })
     this.checkLink();
   }
+
+
 
   switchAcc(){
     this.loadData()
@@ -109,10 +114,14 @@ export class DetailComponent implements OnInit {
     this._ISLINKREFERRAL = this.paramList.referralCode !=null ? true : false;
     if(this._ISLINKREFERRAL){
       this.linkUrl = "https://dummy-website-app.herokuapp.com" + this.router.url;
+      await this.detailService.clickCounter(this.linkUrl)
       await this.detailService.checkPeripheralLink(this.linkUrl).then(result=>{
         if(result == 1) this._ISLINKACTIVE = true;
         else this._ISLINKACTIVE = false
       });
+
+      if(new Date(this.data.expiredDate)  < new Date())this._ISNOTEXPIRED = false
+      else this._ISNOTEXPIRED = true
     }else{
       this.linkUrl = await this.detailService.checkRecurringByCustId(this.customerAccountId, this.paramList.itemId)
       this._ISLINKACTIVE = true;

@@ -92,6 +92,16 @@ calculateQty(data:any): Promise<any> {
       }, reject);
   });
 }
-
+clickCounter(peripheralLink:any): Promise<any> {
+  return new Promise((resolve, reject) => {
+    this.restApiConnector
+      .get("apis/peripheral/counter", '&peripheralLink=' + peripheralLink)
+      .subscribe((response: any) => {
+        this.message = response;
+        this.onMessageChanged.next(this.message);
+        resolve(response);
+      }, reject);
+  });
+}
 
 }
