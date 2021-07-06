@@ -1,68 +1,91 @@
-<div id="containerUpdate" style="height: 627px; top: 20px;">
+<div id="containerUpdate" style="height: 690px; top: 20px;">
 
   <form [formGroup]="itemForm">
 
-      <div id="Insert_Figure">
-          <span>Insert Item</span>
-      </div>
+    <div id="Insert_Figure">
+      <span>Insert Item</span>
+    </div>
 
-      <div id="figurename">
-          <div id="Figurename">
-              <input matInput type="text" name="figurename" placeholder="Nama Item" style="height: 50px" formControlName="name">
-          </div>
+    <div id="figurename">
+      <div id="Figurename">
+        <input matInput type="text" name="figurename" placeholder="Nama Item" style="height: 50px"
+          formControlName="name">
       </div>
-      <div id="descfig" style="top: 110px">
-              <div id="Decription">
-                  <textarea matInput cols="100" rows="5" name="description" placeholder="Deskripsi" formControlName="description"></textarea>
-              </div>
-      </div>
-      <div id="quantity" style="top: 190px">
-              <div id="category_A2_Text_7">
-                  <input matInput type="number" name="quantity" placeholder="Quantity" style="height: 40px" formControlName="quantity">
-              </div>
-      </div>
-      <div id="price" style="top: 240px">
-          <div id="category_A2_Text_6">
-              <input matInput type="number" name="price" placeholder="Price" style="height: 40px" formControlName="price">
-          </div>
-      </div>
-      <div id="category" style="top: 290px">
-          <select name="type" style="height: 40px" formControlName="typeId">
-              <option *ngFor="let item of listType" [value]="item.id">{{item.name}}</option>
-          </select>
-      </div>
-      <div id="price" style="top: 340px">
-        <div id="category_A2_Text_6">
-            <input matInput type="number" name="recurring" placeholder="Recurring" style="height: 40px" formControlName="recurring">
-        </div>
     </div>
-      <div id="price" style="top: 390px">
-        <div id="category_A2_Text_6">
-          <mat-radio-group aria-label="Select type" style="height: 40px" formControlName="radioType">
-            <mat-radio-button value="1">Rp.</mat-radio-button>
-            <mat-radio-button value="2">%</mat-radio-button>
-          </mat-radio-group>
-        </div>
-    </div>
-      <div id="price" style="top: 440px">
-        <div id="category_A2_Text_6">
-            <input matInput type="number" name="duration" placeholder="Duration (expired)" style="height: 40px" formControlName="duration">
-        </div>
-    </div>
-      <div id="Pp" style="top: 495px;">
-          <div id="button_browse" class="button_browse">
-              <div id="Browse___">
-                  <input type="file" name="figurepic" accept="image/*" formControlName="picture">
-              </div>
-          </div>
-          <div id="pp">
-              <span>Picture</span>
-          </div>
+    <div id="descfig" style="top: 110px">
+      <div id="Decription">
+        <textarea matInput cols="100" rows="5" name="description" placeholder="Deskripsi"
+          formControlName="description"></textarea>
       </div>
-      <div id="Button_Sign_in" style="top: 559px;">
-              <div id="INSERT">
-                  <button type="submit" name="updateBtn" value="">Save</button>
-              </div>
+    </div>
+    <div id="quantity" style="top: 190px">
+      <div id="category_A2_Text_7">
+        <input matInput type="number" name="quantity" placeholder="Quantity" style="height: 40px"
+          formControlName="quantity">
       </div>
+    </div>
+    <div id="price" style="top: 240px">
+      <div id="category_A2_Text_6">
+        <input matInput type="number" name="price" placeholder="Price" style="height: 40px" formControlName="price">
+      </div>
+    </div>
+    <div id="category" style="top: 290px">
+      <select name="type" style="height: 40px" formControlName="type">
+        <option *ngFor="let item of listType" [value]="item.name">{{item.name}}</option>
+      </select>
+    </div>
+    <div id="price" style="top: 340px">
+      <div id="category_A2_Text_6">
+        <input matInput type="number" name="commission" placeholder="Commission" style="height: 40px"
+          formControlName="commission">
+
+      </div>
+    </div>
+    <div id="price" style="top: 390px">
+      <div id="category_A2_Text_6">
+        <mat-radio-group aria-label="Select type" style="height: 40px" formControlName="commissionStatus">
+          <mat-radio-button value="1">Rp.</mat-radio-button>
+          <mat-radio-button value="2">%</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div>
+    <div id="price" style="top: 440px">
+      <div id="category_A2_Text_6">
+        <input matInput type="date" name="duration" placeholder="Duration (expired)" style="height: 40px"
+          formControlName="duration">
+      </div>
+    </div>
+    <div id="price" style="top: 490px">
+      <div id="category_A2_Text_6">
+        <input matInput type="number" name="recurring" placeholder="Recurring" style="height: 40px"
+          formControlName="recurring">
+      </div>
+    </div>
+    <div id="price" style="top: 540px">
+      <div id="category_A2_Text_6">
+        <select name="type" style="height: 40px" formControlName="storeId">
+          <option *ngFor="let item of listStore" [value]="item.id">{{item.name}}</option>
+        </select>
+      </div>
+    </div>
+    <div id="Pp" style="top: 595px;">
+      <div id="button_browse" class="button_browse">
+        <div id="Browse___">
+          <input type="file" name="figurepic" (change)="changeImage($event)" accept="image/*" formControlName="picture">
+          <ng-container *ngIf="isUpload && isLoadingUpload">Tunggu upload..</ng-container>
+          <ng-container *ngIf="isUpload && !isLoadingUpload">Sukses upload..</ng-container>
+        </div>
+      </div>
+      <div id="pp">
+        <span>Picture
+
+        </span>
+      </div>
+    </div>
+    <div id="Button_Sign_in" style="top: 655px;">
+      <div id="INSERT">
+        <button type="submit" name="updateBtn" (click)="save()" value="">Save</button>
+      </div>
+    </div>
   </form>
 </div>
