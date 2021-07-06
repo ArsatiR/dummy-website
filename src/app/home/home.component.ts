@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
 
 }
 const LIST_TYPE: any = [
-  {id: 1, name: "Stock"},
-  {id: 2, name: "Non Stock"},
-  {id: 3, name: "Service"},
+  { id: 1, name: "Clothing" },
+  { id: 2, name: "Food" },
+  { id: 3, name: "Beverage" },
 ];
